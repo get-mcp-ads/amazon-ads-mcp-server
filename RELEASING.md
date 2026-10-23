@@ -13,3 +13,5 @@ One tag publishes one version. The workflow in `.github/workflows/release.yml` r
 Before the first release, configure a trusted publisher on npmjs.com for `@getmcpads/amazon-ads-mcp-server` that points at this repository and `release.yml`, and add the `MCP_DNS_PRIVATE_KEY` secret.
 
 A GitHub source release does not by itself mean the npm package or the registry entry is available. The README distinguishes source installation from package installation.
+
+Before tagging, add the release to CHANGELOG.md as `## X.Y.Z - YYYY-MM-DD - Title`, then run `npm run release-history`. The README shows every release from the changelog, and the test suite fails when it falls behind.

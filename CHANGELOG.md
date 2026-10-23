@@ -1,7 +1,6 @@
 # Changelog
 
-## 1.0.0 - 2026-10-23
-
+## 1.0.0 - 2026-10-23 - First standalone release
 - Port the native Amazon Ads tools of the getmcpads gateway at revision `3e1c2c8`: 30 read tools for Sponsored Products, Sponsored Brands and Sponsored Display configuration, Reporting v3, the creative asset library and product metadata, 77 write tools and 3 resources.
 - Add `amazon_ads_list_profiles`, which returns only the profiles in `AMAZON_ADS_PROFILE_IDS` and names configured profiles that Amazon did not return.
 - Validate every Sponsored Brands and Display write against 39 pinned Amazon request contracts. Bind each preview token to the change and to the entity as read from Amazon, and refuse stale or changed confirmations.
