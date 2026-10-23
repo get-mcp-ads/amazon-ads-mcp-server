@@ -1,0 +1,61 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "com.getmcpads/amazon-ads",
+  "title": "Amazon Ads",
+  "description": "Amazon Ads MCP server: 31 read tools, 77 opt-in preview-first writes.",
+  "version": "1.0.0",
+  "websiteUrl": "https://www.getmcpads.com/tools/amazon-ads",
+  "repository": {
+    "url": "https://github.com/get-mcp-ads/amazon-ads-mcp-server",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "@getmcpads/amazon-ads-mcp-server",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "AMAZON_ADS_CLIENT_ID",
+          "description": "Login with Amazon client ID of an application with Amazon Ads API access.",
+          "isRequired": true,
+          "isSecret": false
+        },
+        {
+          "name": "AMAZON_ADS_CLIENT_SECRET",
+          "description": "Client secret of that Login with Amazon security profile. Keep it secret.",
+          "isRequired": true,
+          "isSecret": true
+        },
+        {
+          "name": "AMAZON_ADS_REFRESH_TOKEN",
+          "description": "Refresh token (Atzr|...) granted to that client. Renewed in memory only.",
+          "isRequired": true,
+          "isSecret": true
+        },
+        {
+          "name": "AMAZON_ADS_REGION",
+          "description": "API region of the profiles: NA, EU or FE.",
+          "isRequired": true,
+          "isSecret": false
+        },
+        {
+          "name": "AMAZON_ADS_PROFILE_IDS",
+          "description": "Comma-separated advertising profile IDs this server may use. Required even for reads.",
+          "isRequired": true,
+          "isSecret": false
+        },
+        {
+          "name": "AMAZON_ADS_ENABLE_WRITES",
+          "description": "true exposes the write tools, which preview first. Defaults to false.",
+          "isRequired": false,
+          "isSecret": false
+        }
+      ]
+    }
+  ]
+}

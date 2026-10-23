@@ -1,0 +1,22 @@
+amazon-ads-mcp-server
+Copyright 2026 GetMCPAds
+
+This product includes software developed at GetMCPAds (https://www.getmcpads.com).
+
+An open-source Model Context Protocol server for the Amazon Ads API.
+It is self-hosted and unaffiliated with Amazon.
+
+GetMCPAds also runs a managed gateway that covers Amazon Ads alongside
+Meta Ads, Google Ads, TikTok Ads, Pinterest Ads, X Ads, Google Analytics and
+Search Console, with hosted connections and cross-platform reporting:
+https://www.getmcpads.com
+
+src/amazon/contracts/ contains request schemas derived from Amazon's public
+Amazon Ads API OpenAPI specifications: structure only, without Amazon's
+description text. See src/amazon/contracts/README.md.
+
+---
+
+Amazon, Amazon Ads, Sponsored Products, Sponsored Brands and Sponsored Display
+are trademarks of Amazon.com, Inc. or its affiliates. This project is not
+affiliated with, endorsed by, or sponsored by Amazon.
