@@ -3,7 +3,7 @@
   "name": "com.getmcpads/amazon-ads",
   "title": "Amazon Ads",
   "description": "Amazon Ads MCP server: 31 read tools, 77 opt-in preview-first writes.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "websiteUrl": "https://www.getmcpads.com/tools/amazon-ads",
   "repository": {
     "url": "https://github.com/get-mcp-ads/amazon-ads-mcp-server",
@@ -14,7 +14,7 @@
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "@getmcpads/amazon-ads-mcp-server",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "transport": {
         "type": "stdio"
       },

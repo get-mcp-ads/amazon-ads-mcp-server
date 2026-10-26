@@ -8,7 +8,7 @@ import { installToolQuality } from "./tool-quality.js";
 import { validateConfig, type AmazonConfig } from "./config.js";
 import { createRuntime, registerAmazonReads, registerAmazonResources, registerAmazonWrites } from "./amazon/index.js";
 
-export const PACKAGE_VERSION = "1.0.0";
+export const PACKAGE_VERSION = "1.0.1";
 
 export function createServer(input: AmazonConfig): McpServer {
   const config = validateConfig(input);

@@ -7,7 +7,7 @@ import { ok, type Args, type AmazonRuntime, type ToolResult } from "./shared.js"
 export const PREVIEW_TTL_MS = 10 * 60_000;
 
 export const confirmation = {
-  confirm: z.boolean().default(false).describe("False previews only. True applies the exact change shown in the preview, after the user approved it."),
+  confirm: z.boolean().prefault(false).describe("False previews only. True applies the exact change shown in the preview, after the user approved it."),
   previewToken: z.string().max(16000).optional().describe("Token returned by the preview of this exact change. Required with confirm:true; expires after ten minutes."),
 };
 

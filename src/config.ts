@@ -9,7 +9,7 @@ const schema = z.object({
   refreshToken: z.string().min(6).max(4096).regex(printable).refine(v => v.startsWith("Atzr|")),
   region: z.enum(AMAZON_REGIONS),
   allowedProfileIds: z.array(z.string().regex(/^[1-9]\d{0,19}$/)).min(1).max(200),
-  enableWrites: z.boolean().default(false),
+  enableWrites: z.boolean().prefault(false),
 }).strict();
 
 export type AmazonConfig = z.input<typeof schema>;

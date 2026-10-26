@@ -27,7 +27,7 @@ export function registerAmazonSponsored(c: Collector, rt: AmazonRuntime): void {
   });
   for (const [name, entity] of [["campaigns", "campaigns"], ["ad_groups", "adGroups"], ["product_ads", "productAds"], ["targets", "targets"], ["negative_targets", "negativeTargets"], ["creatives", "creatives"]]) {
     register(c, `amazon_ads_get_sd_${name}`, `Read one page of Sponsored Display ${name.replaceAll("_", " ")}. Requires Display eligibility. Pagination uses startIndex, not a cursor; full pages are conservatively marked partial. Creatives include native media references; these records are not performance metrics.`, {
-      ...account, startIndex, count: z.number().int().min(1).max(100).default(100).describe("Maximum entities in this page, up to 100."),
+      ...account, startIndex, count: z.number().int().min(1).max(100).prefault(100).describe("Maximum entities in this page, up to 100."),
       ...(entity === "creatives" ? { adGroupIds: z.array(id).min(1).max(100).describe("Sponsored Display ad group IDs whose creatives to read. Required by Amazon.") } : {}),
     }, async a => {
       const { api, profileId } = scoped(rt, a.accountId);
@@ -49,11 +49,12 @@ export function registerAmazonTargetingReads(c: Collector, rt: AmazonRuntime): v
   for (const entity of ["keywords", "negativeKeywords", "targets", "negativeTargets"]) {
     const target = entity.includes("Targets") || entity === "targets", name = entity.replace(/[A-Z]/g, ch => `_${ch.toLowerCase()}`);
     const negative = entity.startsWith("negative");
+    const states = negative ? ["enabled", "archived"] as const : ["enabled", "paused", "archived"] as const;
     register(c, `amazon_ads_get_sb_${name}`, `List one page of Sponsored Brands ${name.replaceAll("_", " ")}, including archived entities. Follow the returned cursor or offset; one page is not the whole inventory.`, {
       ...account, campaignIds, adGroupIds,
-      states: z.array(negative ? z.enum(["enabled", "archived"]) : z.enum(["enabled", "paused", "archived"])).min(1).max(3).default(negative ? ["enabled", "archived"] : ["enabled", "paused", "archived"])
+      states: z.array(z.enum(states)).min(1).max(3).prefault([...states])
         .describe(negative ? "States to include, in Amazon's lower case. Negative criteria are enabled or archived." : "States to include, in Amazon's lower case. Defaults to every state."),
-      limit: z.number().int().min(1).max(100).default(100).describe("Maximum entities in this page, up to 100."),
+      limit: z.number().int().min(1).max(100).prefault(100).describe("Maximum entities in this page, up to 100."),
       ...(target ? { nextToken } : { startIndex }),
     }, async a => {
       const { api, profileId } = scoped(rt, a.accountId);

@@ -68,7 +68,7 @@ export function registerAmazonManagement(c: Collector, rt: AmazonRuntime): void 
     dailyBudget: money.describe("Daily budget in the profile currency, not micros."),
     startDate: date.describe("First delivery day, YYYY-MM-DD."),
     endDate: date.optional().describe("Optional last delivery day, YYYY-MM-DD, on or after startDate."),
-    biddingStrategy: biddingStrategy.default("LEGACY_FOR_SALES").describe("Native dynamic bidding strategy."),
+    biddingStrategy: biddingStrategy.prefault("LEGACY_FOR_SALES").describe("Native dynamic bidding strategy."),
     ...confirm,
   }, async a => {
     if (a.endDate && a.endDate < a.startDate) throw new Error("End date must not precede start date.");
