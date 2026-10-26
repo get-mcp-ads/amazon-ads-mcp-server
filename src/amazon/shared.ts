@@ -26,12 +26,12 @@ export const id = z.string().regex(/^[1-9]\d{0,19}$/);
 export const states = z.enum(["ENABLED", "PAUSED", "ARCHIVED"]);
 export const date = z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(s => Number.isFinite(Date.parse(s)) && new Date(s).toISOString().slice(0, 10) === s, "Use a real calendar date.");
 
-export const pageSize = z.number().int().min(1).max(100).default(100).describe("Maximum entities in this page, up to 100. Follow the returned continuation value for the rest.");
+export const pageSize = z.number().int().min(1).max(100).prefault(100).describe("Maximum entities in this page, up to 100. Follow the returned continuation value for the rest.");
 export const nextToken = z.string().min(1).max(8192).optional().describe("Opaque continuation token from the previous page for this same profile and filters. Omit on the first request.");
-export const stateFilter = z.array(states).min(1).max(3).default(["ENABLED", "PAUSED", "ARCHIVED"]).describe("Delivery states to include. Defaults to every state, archived included.");
+export const stateFilter = z.array(states).min(1).max(3).prefault(["ENABLED", "PAUSED", "ARCHIVED"]).describe("Delivery states to include. Defaults to every state, archived included.");
 export const campaignIds = z.array(id).min(1).max(100).optional().describe("Restrict results to these campaign IDs, as decimal strings.");
 export const adGroupIds = z.array(id).min(1).max(100).optional().describe("Restrict results to these ad group IDs, as decimal strings.");
-export const startIndex = z.number().int().min(0).max(100000).default(0).describe("Zero-based offset of the first entity. Use nextStartIndex from the previous page.");
+export const startIndex = z.number().int().min(0).max(100000).prefault(0).describe("Zero-based offset of the first entity. Use nextStartIndex from the previous page.");
 
 export const ok = (value: unknown): ToolResult => ({ content: [{ type: "text", text: JSON.stringify(value) }] });
 export const failed = (value: unknown): ToolResult => ({ ...ok(value), isError: true });

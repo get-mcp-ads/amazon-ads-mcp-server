@@ -74,9 +74,9 @@ export function registerAmazonReads(c: Collector, rt: AmazonRuntime): void {
     ...account,
     startDate: date.describe("First day of the report, YYYY-MM-DD, in the profile timezone."),
     endDate: date.describe("Last day of the report, YYYY-MM-DD, at most 30 days after startDate."),
-    reportType: reportType.default("spCampaigns").describe("Native report type. sp* reports cover Sponsored Products, sb* Sponsored Brands and sd* Sponsored Display."),
+    reportType: reportType.prefault("spCampaigns").describe("Native report type. sp* reports cover Sponsored Products, sb* Sponsored Brands and sd* Sponsored Display."),
     attributionDays: z.enum(["1", "7", "14", "30"]).describe("Native click attribution window in days for purchases and sales. Brands and Display accept 14 only. Never compare different windows as equivalent."),
-    timeUnit: z.enum(["DAILY", "SUMMARY"]).default("DAILY").describe("Daily rows, or one aggregate row per grouping over the requested range."),
+    timeUnit: z.enum(["DAILY", "SUMMARY"]).prefault("DAILY").describe("Daily rows, or one aggregate row per grouping over the requested range."),
   }, async a => {
     const days = (Date.parse(a.endDate) - Date.parse(a.startDate)) / 86_400_000;
     if (days < 0 || days >= 31) throw new Error("Choose an ordered range of at most 31 days; Amazon also enforces report retention.");
@@ -94,8 +94,8 @@ export function registerAmazonReads(c: Collector, rt: AmazonRuntime): void {
   register(c, "amazon_ads_get_report", "Check an Amazon report once and, when complete, read its native rows. Use only the jobToken returned by amazon_ads_create_report for this profile. Downloads are bounded; pagination returns row offsets and marks partial results. Expired reports must be requested again.", {
     ...account,
     jobToken: z.string().min(1).max(8192).describe("Opaque job token returned by amazon_ads_create_report for this profile. Valid for seven days."),
-    offset: z.number().int().min(0).max(1_000_000).default(0).describe("Zero-based index of the first row to return. Use nextOffset from the previous call."),
-    limit: z.number().int().min(1).max(1000).default(500).describe("Maximum rows returned by this call, up to 1000."),
+    offset: z.number().int().min(0).max(1_000_000).prefault(0).describe("Zero-based index of the first row to return. Use nextOffset from the previous call."),
+    limit: z.number().int().min(1).max(1000).prefault(500).describe("Maximum rows returned by this call, up to 1000."),
   }, async a => {
     const { api, profileId } = scoped(rt, a.accountId);
     const job = rt.sealer.unseal("report", a.jobToken) as { profileId?: string; reportId?: string; expires?: number; startDate?: string; endDate?: string; attributionDays?: string; reportType?: ReportType; timeUnit?: string } | null;
@@ -156,7 +156,7 @@ export function registerAmazonWrites(c: Collector, rt: AmazonRuntime): void {
     campaignId: id.describe("Sponsored Products campaign ID in the selected profile."),
     status: z.enum(["ENABLED", "PAUSED"]).describe("ENABLED starts delivery and can spend; PAUSED stops delivery."),
     expectedStatus: states.optional().describe("Current state from the preview, required when confirming."),
-    confirm: z.boolean().default(false).describe("False previews. True applies the exact change explicitly approved by the user."),
+    confirm: z.boolean().prefault(false).describe("False previews. True applies the exact change explicitly approved by the user."),
   }, async a => {
     const before = await campaign(rt, a.accountId, a.campaignId);
     const { api, profileId } = scoped(rt, a.accountId);

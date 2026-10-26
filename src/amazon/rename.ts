@@ -49,7 +49,7 @@ async function rename(rt: AmazonRuntime, a: Args, level: Level, family: "sp" | "
 }
 
 export function registerAmazonRenames(c: Collector, rt: AmazonRuntime): void {
-  const confirm = { confirm: z.boolean().default(false).describe("False previews only. True applies the exact rename explicitly approved by the user.") };
+  const confirm = { confirm: z.boolean().prefault(false).describe("False previews only. True applies the exact rename explicitly approved by the user.") };
   for (const level of ["campaign", "ad_group"] as const) {
     register(c, `amazon_ads_rename_${level}`, `Rename one Amazon Sponsored Products, Brands or Display ${level.replace("_", " ")}. The name is the only thing that changes. Previews by default; archived entities cannot be renamed.`, {
       ...account, adProduct, [ids[level]]: id.describe(`ID of the ${level.replace("_", " ")} to rename, in the selected profile.`),

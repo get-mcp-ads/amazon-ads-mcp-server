@@ -3,6 +3,11 @@ import { collect, data, mockAmazon, mutations, reply, toolkit, type Call } from 
 
 afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 const accountId = "123", assetId = "amzn1.assetlibrary.asset1.image";
+// Zod 4 keeps a description on the schema that received it, so read through optional and default wrappers.
+function describedAs(schema: unknown): string | undefined {
+  for (let current: any = schema; current; current = current._zod?.def?.innerType ?? current._zod?.def?.in) if (current.description) return current.description;
+  return undefined;
+}
 async function confirm(name: string, args: Record<string, unknown>, get = toolkit()) {
   const preview = data(await get(name).handler(args));
   return get(name).handler({ ...args, confirm: true, previewToken: preview.previewToken });
@@ -16,7 +21,7 @@ describe("write tool contract", () => {
   });
 
   it("gives every parameter an explicit description", () => {
-    for (const tool of collect()) for (const [key, schema] of Object.entries(tool.shape)) expect(schema.description, `${tool.name}.${key}`).toBeTruthy();
+    for (const tool of collect()) for (const [key, schema] of Object.entries(tool.shape)) expect(describedAs(schema), `${tool.name}.${key}`).toBeTruthy();
   });
 
   it("refuses incomplete or unselected calls on every write before any request", async () => {

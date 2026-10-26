@@ -54,7 +54,7 @@ export function registerAmazonAssets(c: Collector, rt: AmazonRuntime): void {
     ...account,
     text: z.string().max(200).optional().describe("Optional free-text search over asset names and tags."),
     assetType: z.enum(["IMAGE", "VIDEO"]).optional().describe("Restrict results to images or videos."),
-    limit: z.number().int().min(1).max(100).default(50).describe("Maximum assets in this page, up to 100."),
+    limit: z.number().int().min(1).max(100).prefault(50).describe("Maximum assets in this page, up to 100."),
     nextToken,
   }, async a => {
     const { api, profileId } = scoped(rt, a.accountId);
@@ -82,9 +82,9 @@ export function registerAmazonAssets(c: Collector, rt: AmazonRuntime): void {
     ...account,
     asins: z.array(asin).min(1).max(100).optional().describe("Exact ten-character ASINs to read. Use this or search, not both."),
     search: z.string().min(1).max(200).optional().describe("Free-text catalog search. Use this or asins, not both."),
-    adProduct: z.enum(["SP", "SB", "SD"]).default("SP").describe("Ad product whose eligibility rules apply: SP Sponsored Products, SB Brands, SD Display."),
-    pageIndex: z.number().int().min(0).max(99).default(0).describe("Zero-based page number. Use nextPageIndex from the previous call."),
-    limit: z.number().int().min(1).max(100).default(50).describe("Maximum products in this page, up to 100."),
+    adProduct: z.enum(["SP", "SB", "SD"]).prefault("SP").describe("Ad product whose eligibility rules apply: SP Sponsored Products, SB Brands, SD Display."),
+    pageIndex: z.number().int().min(0).max(99).prefault(0).describe("Zero-based page number. Use nextPageIndex from the previous call."),
+    limit: z.number().int().min(1).max(100).prefault(50).describe("Maximum products in this page, up to 100."),
     cursorToken: z.string().min(1).max(8192).optional().describe("Opaque cursor returned by Amazon. When present it replaces pageIndex."),
   }, async a => {
     if (a.asins && a.search) throw new Error("Use ASINs or search, not both.");

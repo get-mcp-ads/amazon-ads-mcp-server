@@ -25,7 +25,7 @@ export function nativeSchema(s: NativeSchema, field = ""): z.ZodTypeAny {
     const obj = z.object(fields);
     v = typeof n.additionalProperties === "object" ? obj.catchall(nativeSchema(n.additionalProperties)) : n.additionalProperties === true ? obj.passthrough() : obj.strict();
     const choices=s.anyOf??s.oneOf;
-    if (choices) v=v.refine(value=>choices.some(c=>(c.required??[]).every(k=>value[k]!==undefined)) && Object.keys(value).length>0,"Provide at least one complete native creative property.");
+    if (choices) v=v.refine(value=>{const o=value as Record<string,unknown>;return choices.some(c=>(c.required??[]).every(k=>o[k]!==undefined)) && Object.keys(o).length>0;},"Provide at least one complete native creative property.");
   } else if (n.enum?.length) v = z.union(n.enum.map(x=>z.literal(x)) as any);
   else if (n.type === "array") {
     let arr = z.array(nativeSchema(n.items ?? {}));
