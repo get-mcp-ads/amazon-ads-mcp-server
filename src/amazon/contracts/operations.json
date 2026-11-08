@@ -1,0 +1,3588 @@
+[
+  {
+    "family": "sb",
+    "path": "/sb/v4/campaigns",
+    "entity": "campaigns",
+    "id": "campaignId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbcampaignresource.v4+json",
+    "accept": "application/vnd.sbcampaignresource.v4+json",
+    "wrap": "key",
+    "key": "campaigns",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "budgetType": {
+          "type": "string",
+          "enum": [
+            "DAILY",
+            "LIFETIME"
+          ]
+        },
+        "brandEntityId": {
+          "type": "string"
+        },
+        "goal": {
+          "type": "string"
+        },
+        "bidding": {
+          "type": "object",
+          "properties": {
+            "bidOptimization": {
+              "type": "boolean"
+            },
+            "shopperCohortBidAdjustments": {
+              "minItems": 0,
+              "maxItems": 1,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "shopperCohortType": {
+                    "type": "string",
+                    "enum": [
+                      "AUDIENCE_SEGMENT"
+                    ]
+                  },
+                  "percentage": {
+                    "maximum": 900,
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "audienceSegments": {
+                    "minItems": 1,
+                    "maxItems": 1,
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "audienceId": {
+                          "type": "string"
+                        },
+                        "audienceSegmentType": {
+                          "type": "string",
+                          "enum": [
+                            "SPONSORED_ADS_AMC",
+                            "BEHAVIOR_DYNAMIC"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "bidAdjustmentsByPlacement": {
+              "minItems": 0,
+              "maxItems": 3,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "percentage": {
+                    "maximum": 900,
+                    "type": "number",
+                    "minimum": -99
+                  },
+                  "placement": {
+                    "type": "string",
+                    "enum": [
+                      "HOME",
+                      "DETAIL_PAGE",
+                      "OTHER",
+                      "TOP_OF_SEARCH"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "endDate": {
+          "pattern": "^20[1-9][0-9]-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
+          "type": "string"
+        },
+        "productLocation": {
+          "type": "string",
+          "enum": [
+            "SOLD_ON_AMAZON",
+            "NOT_SOLD_ON_AMAZON",
+            "SOLD_ON_DTC"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "maxProperties": 50,
+          "type": "object",
+          "minProperties": 0
+        },
+        "portfolioId": {
+          "type": "string"
+        },
+        "costType": {
+          "type": "string"
+        },
+        "smartDefault": {
+          "minItems": 1,
+          "maxItems": 100,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string",
+          "maxLength": 128
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "PAUSED"
+          ]
+        },
+        "startDate": {
+          "pattern": "^20[1-9][0-9]-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
+          "type": "string"
+        },
+        "budget": {
+          "type": "number"
+        },
+        "siteRestrictions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "AMAZON_BUSINESS"
+            ]
+          },
+          "maxItems": 1,
+          "minItems": 1
+        },
+        "targetedPGDealId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "budget",
+        "budgetType",
+        "name",
+        "state"
+      ]
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/v4/campaigns",
+    "entity": "campaigns",
+    "id": "campaignId",
+    "method": "PUT",
+    "action": "update",
+    "media": "application/vnd.sbcampaignresource.v4+json",
+    "accept": "application/vnd.sbcampaignresource.v4+json",
+    "wrap": "key",
+    "key": "campaigns",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "portfolioId": {
+          "nullable": true,
+          "type": "string"
+        },
+        "bidding": {
+          "type": "object",
+          "properties": {
+            "bidOptimization": {
+              "type": "boolean"
+            },
+            "shopperCohortBidAdjustments": {
+              "minItems": 0,
+              "maxItems": 1,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "shopperCohortType": {
+                    "type": "string",
+                    "enum": [
+                      "AUDIENCE_SEGMENT"
+                    ]
+                  },
+                  "percentage": {
+                    "maximum": 900,
+                    "type": "number",
+                    "minimum": 0
+                  },
+                  "audienceSegments": {
+                    "minItems": 1,
+                    "maxItems": 1,
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "audienceId": {
+                          "type": "string"
+                        },
+                        "audienceSegmentType": {
+                          "type": "string",
+                          "enum": [
+                            "SPONSORED_ADS_AMC",
+                            "BEHAVIOR_DYNAMIC"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "bidAdjustmentsByPlacement": {
+              "minItems": 0,
+              "maxItems": 3,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "percentage": {
+                    "maximum": 900,
+                    "type": "number",
+                    "minimum": -99
+                  },
+                  "placement": {
+                    "type": "string",
+                    "enum": [
+                      "HOME",
+                      "DETAIL_PAGE",
+                      "OTHER",
+                      "TOP_OF_SEARCH"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "endDate": {
+          "nullable": true,
+          "pattern": "^20[1-9][0-9]-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
+          "type": "string"
+        },
+        "campaignId": {
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string",
+          "maxLength": 128
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "PAUSED"
+          ]
+        },
+        "startDate": {
+          "pattern": "^20[1-9][0-9]-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])$",
+          "type": "string"
+        },
+        "budget": {
+          "type": "number"
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "maxProperties": 50,
+          "type": "object",
+          "minProperties": 0
+        }
+      },
+      "required": [
+        "campaignId"
+      ]
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/v4/adGroups",
+    "entity": "adGroups",
+    "id": "adGroupId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbadgroupresource.v4+json",
+    "accept": "application/vnd.sbadgroupresource.v4+json",
+    "wrap": "key",
+    "key": "adGroups",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "campaignId": {
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string",
+          "maxLength": 255
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "PAUSED"
+          ]
+        }
+      },
+      "required": [
+        "campaignId",
+        "name",
+        "state"
+      ]
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/v4/adGroups",
+    "entity": "adGroups",
+    "id": "adGroupId",
+    "method": "PUT",
+    "action": "update",
+    "media": "application/vnd.sbadgroupresource.v4+json",
+    "accept": "application/vnd.sbadgroupresource.v4+json",
+    "wrap": "key",
+    "key": "adGroups",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "type": "string",
+          "maxLength": 255
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "PAUSED"
+          ]
+        },
+        "adGroupId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "adGroupId"
+      ]
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/v4/ads",
+    "entity": "ads",
+    "id": "adId",
+    "method": "PUT",
+    "action": "update",
+    "media": "application/vnd.sbadresource.v4+json",
+    "accept": "application/vnd.sbadresource.v4+json",
+    "wrap": "key",
+    "key": "ads",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "adId": {
+          "type": "string"
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string",
+          "maxLength": 255
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "PAUSED"
+          ]
+        }
+      },
+      "required": [
+        "adId"
+      ]
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/v4/ads/productCollection",
+    "entity": "ads",
+    "id": "adId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbadresource.v4+json",
+    "accept": "application/vnd.sbadresource.v4+json",
+    "wrap": "key",
+    "key": "ads",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "landingPage": {
+          "type": "object",
+          "properties": {
+            "asins": {
+              "minItems": 3,
+              "maxItems": 100,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "pageType": {
+              "type": "string",
+              "enum": [
+                "PRODUCT_LIST",
+                "STORE",
+                "CUSTOM_URL",
+                "DETAIL_PAGE"
+              ]
+            },
+            "url": {
+              "type": "string"
+            }
+          }
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string",
+          "maxLength": 255
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "PAUSED"
+          ]
+        },
+        "adGroupId": {
+          "type": "string"
+        },
+        "creative": {
+          "type": "object",
+          "properties": {
+            "brandLogoCrop": {
+              "type": "object",
+              "properties": {
+                "top": {
+                  "type": "number"
+                },
+                "left": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "asins": {
+              "minItems": 0,
+              "maxItems": 3,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "brandName": {
+              "minLength": 1,
+              "type": "string",
+              "maxLength": 30
+            },
+            "customImageAssetId": {
+              "type": "string"
+            },
+            "customImageCrop": {
+              "type": "object",
+              "properties": {
+                "top": {
+                  "type": "number"
+                },
+                "left": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "brandLogoAssetID": {
+              "type": "string"
+            },
+            "headline": {
+              "minLength": 1,
+              "type": "string",
+              "maxLength": 50
+            }
+          }
+        }
+      },
+      "required": [
+        "adGroupId",
+        "creative",
+        "landingPage",
+        "name",
+        "state"
+      ]
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/v4/ads/productCollectionExtended",
+    "entity": "ads",
+    "id": "adId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbadresource.v4+json",
+    "accept": "application/vnd.sbadresource.v4+json",
+    "wrap": "key",
+    "key": "ads",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "landingPage": {
+          "type": "object",
+          "properties": {
+            "asins": {
+              "minItems": 3,
+              "maxItems": 100,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "pageType": {
+              "type": "string",
+              "enum": [
+                "PRODUCT_LIST",
+                "STORE",
+                "CUSTOM_URL",
+                "DETAIL_PAGE"
+              ]
+            },
+            "url": {
+              "type": "string"
+            }
+          }
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string",
+          "maxLength": 255
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "PAUSED"
+          ]
+        },
+        "adGroupId": {
+          "type": "string"
+        },
+        "creative": {
+          "type": "object",
+          "properties": {
+            "brandLogoCrop": {
+              "type": "object",
+              "properties": {
+                "top": {
+                  "type": "number"
+                },
+                "left": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "asins": {
+              "minItems": 0,
+              "maxItems": 3,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "brandName": {
+              "minLength": 1,
+              "type": "string",
+              "maxLength": 30
+            },
+            "customImages": {
+              "minItems": 1,
+              "maxItems": 5,
+              "uniqueItems": true,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "assetId": {
+                    "type": "string"
+                  },
+                  "crop": {
+                    "type": "object",
+                    "properties": {
+                      "top": {
+                        "type": "number"
+                      },
+                      "left": {
+                        "type": "number"
+                      },
+                      "width": {
+                        "type": "number"
+                      },
+                      "height": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "consentToTranslate": {
+              "type": "boolean"
+            },
+            "creativePropertiesToOptimize": {
+              "minItems": 0,
+              "maxItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "HEADLINE"
+                ]
+              }
+            },
+            "brandLogoAssetID": {
+              "type": "string"
+            },
+            "headline": {
+              "minLength": 1,
+              "type": "string",
+              "maxLength": 50
+            }
+          }
+        }
+      },
+      "required": [
+        "adGroupId",
+        "creative",
+        "landingPage",
+        "name",
+        "state"
+      ]
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/v4/ads/video",
+    "entity": "ads",
+    "id": "adId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbadresource.v4+json",
+    "accept": "application/vnd.sbadresource.v4+json",
+    "wrap": "key",
+    "key": "ads",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "type": "string",
+          "maxLength": 255
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "PAUSED"
+          ]
+        },
+        "adGroupId": {
+          "type": "string"
+        },
+        "creative": {
+          "type": "object",
+          "properties": {
+            "asins": {
+              "minItems": 1,
+              "maxItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "consentToTranslate": {
+              "type": "boolean"
+            },
+            "videoAssetIds": {
+              "minItems": 1,
+              "maxItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "adGroupId",
+        "creative",
+        "name",
+        "state"
+      ]
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/v4/ads/brandVideo",
+    "entity": "ads",
+    "id": "adId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbadresource.v4+json",
+    "accept": "application/vnd.sbadresource.v4+json",
+    "wrap": "key",
+    "key": "ads",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "landingPage": {
+          "type": "object",
+          "properties": {
+            "asins": {
+              "minItems": 3,
+              "maxItems": 100,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "pageType": {
+              "type": "string",
+              "enum": [
+                "PRODUCT_LIST",
+                "STORE",
+                "CUSTOM_URL",
+                "DETAIL_PAGE"
+              ]
+            },
+            "url": {
+              "type": "string"
+            }
+          }
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string",
+          "maxLength": 255
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "PAUSED"
+          ]
+        },
+        "adGroupId": {
+          "type": "string"
+        },
+        "creative": {
+          "type": "object",
+          "properties": {
+            "asins": {
+              "minItems": 0,
+              "maxItems": 3,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "brandLogoCrop": {
+              "type": "object",
+              "properties": {
+                "top": {
+                  "type": "number"
+                },
+                "left": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "brandName": {
+              "minLength": 1,
+              "type": "string",
+              "maxLength": 30
+            },
+            "consentToTranslate": {
+              "type": "boolean"
+            },
+            "videoAssetIds": {
+              "minItems": 1,
+              "maxItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "brandLogoAssetID": {
+              "type": "string"
+            },
+            "headline": {
+              "minLength": 1,
+              "type": "string",
+              "maxLength": 50
+            }
+          }
+        }
+      },
+      "required": [
+        "adGroupId",
+        "creative",
+        "landingPage",
+        "name",
+        "state"
+      ]
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/v4/ads/storeSpotlight",
+    "entity": "ads",
+    "id": "adId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbadresource.v4+json",
+    "accept": "application/vnd.sbadresource.v4+json",
+    "wrap": "key",
+    "key": "ads",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "landingPage": {
+          "type": "object",
+          "properties": {
+            "asins": {
+              "minItems": 3,
+              "maxItems": 100,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "pageType": {
+              "type": "string",
+              "enum": [
+                "PRODUCT_LIST",
+                "STORE",
+                "CUSTOM_URL",
+                "DETAIL_PAGE"
+              ]
+            },
+            "url": {
+              "type": "string"
+            }
+          }
+        },
+        "name": {
+          "minLength": 1,
+          "type": "string",
+          "maxLength": 255
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "PAUSED"
+          ]
+        },
+        "adGroupId": {
+          "type": "string"
+        },
+        "creative": {
+          "type": "object",
+          "properties": {
+            "brandLogoCrop": {
+              "type": "object",
+              "properties": {
+                "top": {
+                  "type": "number"
+                },
+                "left": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "brandName": {
+              "minLength": 1,
+              "type": "string",
+              "maxLength": 30
+            },
+            "subpages": {
+              "minItems": 3,
+              "maxItems": 3,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pageTitle": {
+                    "type": "string"
+                  },
+                  "asin": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "consentToTranslate": {
+              "type": "boolean"
+            },
+            "creativePropertiesToOptimize": {
+              "minItems": 0,
+              "maxItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "HEADLINE"
+                ]
+              }
+            },
+            "brandLogoAssetID": {
+              "type": "string"
+            },
+            "headline": {
+              "minLength": 1,
+              "type": "string",
+              "maxLength": 50
+            }
+          }
+        }
+      },
+      "required": [
+        "adGroupId",
+        "creative",
+        "landingPage",
+        "name",
+        "state"
+      ]
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/v4/ads/autoCollection",
+    "entity": "ads",
+    "id": "adId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbadresource.v4+json",
+    "accept": "application/vnd.sbadresource.v4+json",
+    "wrap": "key",
+    "key": "ads",
+    "schema": {
+      "properties": {
+        "adGroupId": {
+          "type": "string"
+        },
+        "creative": {
+          "properties": {
+            "asinExclusions": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 1000,
+              "minItems": 0,
+              "type": "array"
+            },
+            "brandLogoAssetID": {
+              "type": "string"
+            },
+            "brandLogoCrop": {
+              "type": "object",
+              "properties": {
+                "top": {
+                  "type": "number"
+                },
+                "left": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "brandName": {
+              "maxLength": 30,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "brandName"
+          ],
+          "type": "object"
+        },
+        "name": {
+          "maxLength": 255,
+          "minLength": 1,
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "PAUSED"
+          ]
+        }
+      },
+      "required": [
+        "adGroupId",
+        "creative",
+        "name",
+        "state"
+      ],
+      "type": "object"
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/v4/ads/manualCollection",
+    "entity": "ads",
+    "id": "adId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbadresource.v4+json",
+    "accept": "application/vnd.sbadresource.v4+json",
+    "wrap": "key",
+    "key": "ads",
+    "schema": {
+      "properties": {
+        "adGroupId": {
+          "type": "string"
+        },
+        "creative": {
+          "properties": {
+            "asins": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 10,
+              "minItems": 3,
+              "type": "array"
+            },
+            "brandLogoAssetID": {
+              "type": "string"
+            },
+            "brandLogoCrop": {
+              "type": "object",
+              "properties": {
+                "top": {
+                  "type": "number"
+                },
+                "left": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "brandName": {
+              "maxLength": 30,
+              "minLength": 1,
+              "type": "string"
+            },
+            "landingPage": {
+              "properties": {
+                "pageType": {
+                  "enum": [
+                    "PRODUCT_LIST",
+                    "STORE"
+                  ],
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "title": {
+              "maxLength": 32,
+              "type": "string"
+            }
+          },
+          "required": [
+            "asins",
+            "brandName"
+          ],
+          "type": "object"
+        },
+        "name": {
+          "maxLength": 255,
+          "minLength": 1,
+          "type": "string"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "PAUSED"
+          ]
+        }
+      },
+      "required": [
+        "adGroupId",
+        "creative",
+        "name",
+        "state"
+      ],
+      "type": "object"
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/ads/creatives/productCollection",
+    "entity": "adCreatives",
+    "id": "adId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbAdCreativeResource.v4+json",
+    "accept": "application/vnd.sbAdCreativeResource.v4+json",
+    "wrap": "single",
+    "key": "adCreatives",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "adId": {
+          "type": "string"
+        },
+        "creative": {
+          "type": "object",
+          "properties": {
+            "asins": {
+              "minItems": 0,
+              "maxItems": 3,
+              "uniqueItems": true,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "brandLogoCrop": {
+              "type": "object",
+              "properties": {
+                "top": {
+                  "type": "number"
+                },
+                "left": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "brandName": {
+              "type": "string"
+            },
+            "customImageAssetId": {
+              "type": "string"
+            },
+            "customImageCrop": {
+              "type": "object",
+              "properties": {
+                "top": {
+                  "type": "number"
+                },
+                "left": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "brandLogoAssetId": {
+              "type": "string"
+            },
+            "headline": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "asins",
+            "brandLogoAssetId",
+            "brandName",
+            "headline"
+          ]
+        }
+      },
+      "required": [
+        "adId",
+        "creative"
+      ]
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/ads/creatives/productCollectionExtended",
+    "entity": "adCreatives",
+    "id": "adId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbAdCreativeResource.v4+json",
+    "accept": "application/vnd.sbAdCreativeResource.v4+json",
+    "wrap": "single",
+    "key": "adCreatives",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "adId": {
+          "type": "string"
+        },
+        "creative": {
+          "type": "object",
+          "properties": {
+            "asins": {
+              "minItems": 0,
+              "maxItems": 3,
+              "uniqueItems": true,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "brandLogoCrop": {
+              "type": "object",
+              "properties": {
+                "top": {
+                  "type": "number"
+                },
+                "left": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "brandName": {
+              "type": "string"
+            },
+            "landingPage": {
+              "type": "object",
+              "properties": {
+                "asins": {
+                  "minItems": 0,
+                  "maxItems": 100,
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            },
+            "customImages": {
+              "minItems": 1,
+              "maxItems": 5,
+              "uniqueItems": true,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "assetId": {
+                    "type": "string"
+                  },
+                  "crop": {
+                    "type": "object",
+                    "properties": {
+                      "top": {
+                        "type": "number"
+                      },
+                      "left": {
+                        "type": "number"
+                      },
+                      "width": {
+                        "type": "number"
+                      },
+                      "height": {
+                        "type": "number"
+                      }
+                    }
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "consentToTranslate": {
+              "type": "boolean"
+            },
+            "creativePropertiesToOptimize": {
+              "minItems": 0,
+              "maxItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "HEADLINE"
+                ]
+              }
+            },
+            "brandLogoAssetId": {
+              "type": "string"
+            },
+            "headline": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "asins",
+            "brandLogoAssetId",
+            "brandName",
+            "headline"
+          ]
+        }
+      },
+      "required": [
+        "adId",
+        "creative"
+      ]
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/ads/creatives/video",
+    "entity": "adCreatives",
+    "id": "adId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbAdCreativeResource.v4+json",
+    "accept": "application/vnd.sbAdCreativeResource.v4+json",
+    "wrap": "single",
+    "key": "adCreatives",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "adId": {
+          "type": "string"
+        },
+        "creative": {
+          "type": "object",
+          "properties": {
+            "consentToTranslate": {
+              "type": "boolean"
+            },
+            "videoAssetIds": {
+              "minItems": 1,
+              "maxItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "videoAssetIds"
+          ]
+        }
+      },
+      "required": [
+        "adId",
+        "creative"
+      ]
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/ads/creatives/brandVideo",
+    "entity": "adCreatives",
+    "id": "adId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbAdCreativeResource.v4+json",
+    "accept": "application/vnd.sbAdCreativeResource.v4+json",
+    "wrap": "single",
+    "key": "adCreatives",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "adId": {
+          "type": "string"
+        },
+        "creative": {
+          "type": "object",
+          "properties": {
+            "asins": {
+              "minItems": 0,
+              "maxItems": 3,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "brandLogoCrop": {
+              "type": "object",
+              "properties": {
+                "top": {
+                  "type": "number"
+                },
+                "left": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "brandName": {
+              "type": "string"
+            },
+            "landingPage": {
+              "type": "object",
+              "properties": {
+                "asins": {
+                  "minItems": 0,
+                  "maxItems": 100,
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            },
+            "consentToTranslate": {
+              "type": "boolean"
+            },
+            "videoAssetIds": {
+              "minItems": 1,
+              "maxItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "brandLogoAssetId": {
+              "type": "string"
+            },
+            "headline": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "asins",
+            "brandLogoAssetId",
+            "brandName",
+            "headline",
+            "videoAssetIds"
+          ]
+        }
+      },
+      "required": [
+        "adId",
+        "creative"
+      ]
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/ads/creatives/storeSpotlight",
+    "entity": "adCreatives",
+    "id": "adId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbAdCreativeResource.v4+json",
+    "accept": "application/vnd.sbAdCreativeResource.v4+json",
+    "wrap": "single",
+    "key": "adCreatives",
+    "schema": {
+      "type": "object",
+      "properties": {
+        "adId": {
+          "type": "string"
+        },
+        "creative": {
+          "type": "object",
+          "properties": {
+            "brandLogoCrop": {
+              "type": "object",
+              "properties": {
+                "top": {
+                  "type": "number"
+                },
+                "left": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "brandName": {
+              "type": "string"
+            },
+            "subpages": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "pageTitle": {
+                    "type": "string"
+                  },
+                  "asin": {
+                    "type": "string"
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "landingPage": {
+              "type": "object",
+              "properties": {
+                "asins": {
+                  "minItems": 0,
+                  "maxItems": 100,
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              }
+            },
+            "consentToTranslate": {
+              "type": "boolean"
+            },
+            "creativePropertiesToOptimize": {
+              "minItems": 0,
+              "maxItems": 1,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "HEADLINE"
+                ]
+              }
+            },
+            "brandLogoAssetId": {
+              "type": "string"
+            },
+            "headline": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "brandLogoAssetId",
+            "brandName",
+            "headline",
+            "subpages"
+          ]
+        }
+      },
+      "required": [
+        "adId",
+        "creative"
+      ]
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/ads/creatives/autoCollection",
+    "entity": "adCreatives",
+    "id": "adId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbadresource.v4+json",
+    "accept": "application/vnd.sbadresource.v4+json",
+    "wrap": "key",
+    "key": "ads",
+    "schema": {
+      "properties": {
+        "adId": {
+          "type": "string"
+        },
+        "creative": {
+          "properties": {
+            "asinExclusions": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 1000,
+              "minItems": 0,
+              "type": "array"
+            },
+            "brandLogoAssetID": {
+              "type": "string"
+            },
+            "brandLogoCrop": {
+              "type": "object",
+              "properties": {
+                "top": {
+                  "type": "number"
+                },
+                "left": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "brandName": {
+              "maxLength": 30,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "brandName"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "adId",
+        "creative"
+      ],
+      "type": "object"
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/ads/creatives/manualCollection",
+    "entity": "adCreatives",
+    "id": "adId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/vnd.sbadresource.v4+json",
+    "accept": "application/vnd.sbadresource.v4+json",
+    "wrap": "key",
+    "key": "ads",
+    "schema": {
+      "properties": {
+        "adId": {
+          "type": "string"
+        },
+        "creative": {
+          "properties": {
+            "asins": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 10,
+              "minItems": 3,
+              "type": "array"
+            },
+            "brandLogoAssetID": {
+              "type": "string"
+            },
+            "brandLogoCrop": {
+              "type": "object",
+              "properties": {
+                "top": {
+                  "type": "number"
+                },
+                "left": {
+                  "type": "number"
+                },
+                "width": {
+                  "type": "number"
+                },
+                "height": {
+                  "type": "number"
+                }
+              }
+            },
+            "brandName": {
+              "maxLength": 30,
+              "minLength": 1,
+              "type": "string"
+            },
+            "landingPage": {
+              "properties": {
+                "pageType": {
+                  "enum": [
+                    "PRODUCT_LIST",
+                    "STORE"
+                  ],
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "title": {
+              "maxLength": 32,
+              "type": "string"
+            }
+          },
+          "required": [
+            "asins",
+            "brandName"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "adId",
+        "creative"
+      ],
+      "type": "object"
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/keywords",
+    "entity": "keywords",
+    "id": "keywordId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/json",
+    "accept": "application/vnd.sbkeywordresponse.v3+json",
+    "wrap": "array",
+    "key": "keywords",
+    "schema": {
+      "properties": {
+        "adGroupId": {
+          "type": "integer"
+        },
+        "campaignId": {
+          "type": "integer"
+        },
+        "keywordText": {
+          "type": "string"
+        },
+        "nativeLanguageKeyword": {
+          "type": "string"
+        },
+        "nativeLanguageLocale": {
+          "type": "string"
+        },
+        "matchType": {
+          "type": "string",
+          "enum": [
+            "broad",
+            "exact",
+            "phrase"
+          ]
+        },
+        "bid": {
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/keywords",
+    "entity": "keywords",
+    "id": "keywordId",
+    "method": "PUT",
+    "action": "update",
+    "media": "application/json",
+    "accept": "application/vnd.sbkeywordresponse.v3+json",
+    "wrap": "array",
+    "key": "keywords",
+    "schema": {
+      "properties": {
+        "keywordId": {
+          "type": "integer"
+        },
+        "adGroupId": {
+          "type": "integer"
+        },
+        "campaignId": {
+          "type": "integer"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "paused",
+            "archived",
+            "draft"
+          ]
+        },
+        "bid": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "keywordId",
+        "adGroupId",
+        "campaignId"
+      ],
+      "type": "object"
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/negativeKeywords",
+    "entity": "negativeKeywords",
+    "id": "keywordId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/json",
+    "accept": "application/vnd.sbkeywordresponse.v3+json",
+    "wrap": "array",
+    "key": "negativeKeywords",
+    "schema": {
+      "properties": {
+        "adGroupId": {
+          "type": "integer"
+        },
+        "campaignId": {
+          "type": "integer"
+        },
+        "keywordText": {
+          "type": "string"
+        },
+        "matchType": {
+          "type": "string",
+          "enum": [
+            "negativeExact",
+            "negativePhrase"
+          ]
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/negativeKeywords",
+    "entity": "negativeKeywords",
+    "id": "keywordId",
+    "method": "PUT",
+    "action": "update",
+    "media": "application/json",
+    "accept": "application/vnd.sbkeywordresponse.v3+json",
+    "wrap": "array",
+    "key": "negativeKeywords",
+    "schema": {
+      "properties": {
+        "keywordId": {
+          "type": "integer"
+        },
+        "adGroupId": {
+          "type": "integer"
+        },
+        "campaignId": {
+          "type": "integer"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "archived",
+            "draft"
+          ]
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/targets",
+    "entity": "targets",
+    "id": "targetId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/json",
+    "accept": "application/vnd.sbcreatetargetsresponse.v3+json",
+    "wrap": "key",
+    "key": "targets",
+    "schema": {
+      "properties": {
+        "adGroupId": {
+          "type": "integer"
+        },
+        "campaignId": {
+          "type": "integer"
+        },
+        "expressions": {
+          "type": "array",
+          "items": {
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "asinCategorySameAs",
+                  "asinBrandSameAs",
+                  "asinPriceLessThan",
+                  "asinPriceBetween",
+                  "asinPriceGreaterThan",
+                  "asinReviewRatingLessThan",
+                  "asinReviewRatingBetween",
+                  "asinReviewRatingGreaterThan",
+                  "asinSameAs"
+                ]
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "bid": {
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/targets",
+    "entity": "targets",
+    "id": "targetId",
+    "method": "PUT",
+    "action": "update",
+    "media": "application/json",
+    "accept": "application/vnd.updatetargetsresponse.v3+json",
+    "wrap": "key",
+    "key": "targets",
+    "schema": {
+      "properties": {
+        "targetId": {
+          "type": "integer"
+        },
+        "adGroupId": {
+          "type": "integer"
+        },
+        "campaignId": {
+          "type": "integer"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "paused",
+            "archived",
+            "draft"
+          ]
+        },
+        "bid": {
+          "type": "number"
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/negativeTargets",
+    "entity": "negativeTargets",
+    "id": "targetId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/json",
+    "accept": "application/vnd.sbcreatenegativetargetsrequest.v3+json",
+    "wrap": "key",
+    "key": "negativeTargets",
+    "schema": {
+      "properties": {
+        "adGroupId": {
+          "type": "integer"
+        },
+        "campaignId": {
+          "type": "integer"
+        },
+        "expressions": {
+          "type": "array",
+          "items": {
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "asinBrandSameAs",
+                  "asinSameAs"
+                ]
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sb",
+    "path": "/sb/negativeTargets",
+    "entity": "negativeTargets",
+    "id": "targetId",
+    "method": "PUT",
+    "action": "update",
+    "media": "application/json",
+    "accept": "application/vnd.updatenegativetargetsresponse.v3+json",
+    "wrap": "key",
+    "key": "negativeTargets",
+    "schema": {
+      "properties": {
+        "targetId": {
+          "type": "integer"
+        },
+        "adGroupId": {
+          "type": "integer"
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "paused",
+            "archived",
+            "draft"
+          ]
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sd",
+    "path": "/sd/campaigns",
+    "entity": "campaigns",
+    "id": "campaignId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/json",
+    "accept": "application/json",
+    "wrap": "array",
+    "key": "campaigns",
+    "schema": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "budgetType": {
+          "type": "string",
+          "enum": [
+            "daily"
+          ]
+        },
+        "budget": {
+          "type": "number"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string",
+          "nullable": true
+        },
+        "costType": {
+          "type": "string",
+          "enum": [
+            "cpc",
+            "vcpm"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "paused",
+            "archived"
+          ]
+        },
+        "portfolioId": {
+          "type": "integer",
+          "nullable": true
+        },
+        "tactic": {
+          "type": "string",
+          "enum": [
+            "T00020",
+            "T00030"
+          ]
+        }
+      },
+      "required": [],
+      "type": "object"
+    }
+  },
+  {
+    "family": "sd",
+    "path": "/sd/campaigns",
+    "entity": "campaigns",
+    "id": "campaignId",
+    "method": "PUT",
+    "action": "update",
+    "media": "application/json",
+    "accept": "application/json",
+    "wrap": "array",
+    "key": "campaigns",
+    "schema": {
+      "required": [
+        "campaignId"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "budgetType": {
+          "type": "string",
+          "enum": [
+            "daily"
+          ]
+        },
+        "budget": {
+          "type": "number"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string",
+          "nullable": true
+        },
+        "costType": {
+          "type": "string",
+          "enum": [
+            "cpc",
+            "vcpm"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "paused",
+            "archived"
+          ]
+        },
+        "portfolioId": {
+          "type": "integer",
+          "nullable": true
+        },
+        "campaignId": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sd",
+    "path": "/sd/adGroups",
+    "entity": "adGroups",
+    "id": "adGroupId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/json",
+    "accept": "application/json",
+    "wrap": "array",
+    "key": "adGroups",
+    "schema": {
+      "required": [
+        "campaignId",
+        "name",
+        "state"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "campaignId": {
+          "type": "integer"
+        },
+        "defaultBid": {
+          "type": "number"
+        },
+        "bidOptimization": {
+          "type": "string",
+          "enum": [
+            "reach",
+            "clicks",
+            "conversions"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "paused",
+            "archived"
+          ]
+        },
+        "creativeType": {
+          "type": "string",
+          "nullable": true,
+          "enum": [
+            "IMAGE",
+            "VIDEO"
+          ]
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sd",
+    "path": "/sd/adGroups",
+    "entity": "adGroups",
+    "id": "adGroupId",
+    "method": "PUT",
+    "action": "update",
+    "media": "application/json",
+    "accept": "application/json",
+    "wrap": "array",
+    "key": "adGroups",
+    "schema": {
+      "required": [
+        "adGroupId"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "campaignId": {
+          "type": "integer"
+        },
+        "defaultBid": {
+          "type": "number"
+        },
+        "bidOptimization": {
+          "type": "string",
+          "enum": [
+            "reach",
+            "clicks",
+            "conversions"
+          ]
+        },
+        "state": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "paused",
+            "archived"
+          ]
+        },
+        "adGroupId": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sd",
+    "path": "/sd/productAds",
+    "entity": "productAds",
+    "id": "adId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/json",
+    "accept": "application/json",
+    "wrap": "array",
+    "key": "productAds",
+    "schema": {
+      "required": [
+        "campaignId",
+        "adGroupId",
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "paused",
+            "archived"
+          ]
+        },
+        "adGroupId": {
+          "type": "integer"
+        },
+        "campaignId": {
+          "type": "integer"
+        },
+        "landingPageURL": {
+          "type": "string"
+        },
+        "landingPageType": {
+          "type": "string",
+          "enum": [
+            "STORE",
+            "MOMENT",
+            "OFF_AMAZON_LINK"
+          ]
+        },
+        "adName": {
+          "type": "string"
+        },
+        "asin": {
+          "type": "string"
+        },
+        "sku": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sd",
+    "path": "/sd/productAds",
+    "entity": "productAds",
+    "id": "adId",
+    "method": "PUT",
+    "action": "update",
+    "media": "application/json",
+    "accept": "application/json",
+    "wrap": "array",
+    "key": "productAds",
+    "schema": {
+      "required": [
+        "adId"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "paused",
+            "archived"
+          ]
+        },
+        "adId": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sd",
+    "path": "/sd/targets",
+    "entity": "targets",
+    "id": "targetId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/json",
+    "accept": "application/json",
+    "wrap": "array",
+    "key": "targets",
+    "schema": {
+      "required": [
+        "adGroupId",
+        "expressionType",
+        "expression"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "paused",
+            "archived"
+          ]
+        },
+        "bid": {
+          "type": "number",
+          "nullable": true,
+          "minimum": 0.02
+        },
+        "adGroupId": {
+          "type": "integer"
+        },
+        "expressionType": {
+          "type": "string",
+          "enum": [
+            "manual",
+            "auto"
+          ]
+        },
+        "expression": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "asinSameAs",
+                      "asinCategorySameAs",
+                      "asinBrandSameAs",
+                      "asinPriceBetween",
+                      "asinPriceGreaterThan",
+                      "asinPriceLessThan",
+                      "asinReviewRatingLessThan",
+                      "asinReviewRatingGreaterThan",
+                      "asinReviewRatingBetween",
+                      "asinIsPrimeShippingEligible",
+                      "asinAgeRangeSameAs",
+                      "asinGenreSameAs",
+                      "similarProduct"
+                    ]
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "contentCategorySameAs"
+                    ]
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "enum": [
+                      "views",
+                      "audience",
+                      "purchases"
+                    ]
+                  },
+                  "value": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "asinCategorySameAs",
+                            "asinBrandSameAs",
+                            "asinPriceBetween",
+                            "asinPriceGreaterThan",
+                            "asinPriceLessThan",
+                            "asinReviewRatingLessThan",
+                            "asinReviewRatingGreaterThan",
+                            "asinReviewRatingBetween",
+                            "similarProduct",
+                            "exactProduct",
+                            "asinIsPrimeShippingEligible",
+                            "asinAgeRangeSameAs",
+                            "asinGenreSameAs",
+                            "audienceSameAs",
+                            "lookback",
+                            "negative",
+                            "relatedProduct"
+                          ]
+                        },
+                        "value": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sd",
+    "path": "/sd/targets",
+    "entity": "targets",
+    "id": "targetId",
+    "method": "PUT",
+    "action": "update",
+    "media": "application/json",
+    "accept": "application/json",
+    "wrap": "array",
+    "key": "targets",
+    "schema": {
+      "required": [
+        "targetId"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "paused",
+            "archived"
+          ]
+        },
+        "bid": {
+          "type": "number",
+          "nullable": true,
+          "minimum": 0.02
+        },
+        "targetId": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sd",
+    "path": "/sd/negativeTargets",
+    "entity": "negativeTargets",
+    "id": "targetId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/json",
+    "accept": "application/json",
+    "wrap": "array",
+    "key": "negativeTargets",
+    "schema": {
+      "required": [
+        "adGroupId",
+        "expressionType",
+        "expression",
+        "state"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "paused",
+            "archived"
+          ]
+        },
+        "adGroupId": {
+          "type": "integer"
+        },
+        "expression": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "asinSameAs",
+                  "asinBrandSameAs"
+                ]
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "expressionType": {
+          "type": "string",
+          "enum": [
+            "manual",
+            "auto"
+          ]
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sd",
+    "path": "/sd/negativeTargets",
+    "entity": "negativeTargets",
+    "id": "targetId",
+    "method": "PUT",
+    "action": "update",
+    "media": "application/json",
+    "accept": "application/json",
+    "wrap": "array",
+    "key": "negativeTargets",
+    "schema": {
+      "required": [
+        "targetId"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "enum": [
+            "enabled",
+            "paused",
+            "archived"
+          ]
+        },
+        "targetId": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    }
+  },
+  {
+    "family": "sd",
+    "path": "/sd/creatives",
+    "entity": "creatives",
+    "id": "creativeId",
+    "method": "POST",
+    "action": "create",
+    "media": "application/json",
+    "accept": "application/json",
+    "wrap": "array",
+    "key": "creatives",
+    "schema": {
+      "type": "object",
+      "required": [
+        "adGroupId",
+        "properties"
+      ],
+      "properties": {
+        "adGroupId": {
+          "type": "number"
+        },
+        "creativeType": {
+          "type": "string",
+          "nullable": true,
+          "enum": [
+            "IMAGE",
+            "VIDEO"
+          ]
+        },
+        "properties": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "headline": {
+                  "type": "string",
+                  "maxLength": 50
+                },
+                "hasTermsAndConditions": {
+                  "type": "boolean"
+                },
+                "originalHeadline": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "brandLogo": {
+                  "type": "object",
+                  "required": [
+                    "assetId",
+                    "assetVersion"
+                  ],
+                  "properties": {
+                    "assetId": {
+                      "type": "string"
+                    },
+                    "assetVersion": {
+                      "type": "string"
+                    },
+                    "croppingCoordinates": {
+                      "type": "object",
+                      "required": [
+                        "top",
+                        "left",
+                        "width",
+                        "height"
+                      ],
+                      "properties": {
+                        "top": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "left": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "width": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "height": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "rectCustomImage": {
+                  "type": "object",
+                  "required": [
+                    "assetId",
+                    "assetVersion"
+                  ],
+                  "properties": {
+                    "assetId": {
+                      "type": "string"
+                    },
+                    "assetVersion": {
+                      "type": "string"
+                    },
+                    "croppingCoordinates": {
+                      "type": "object",
+                      "required": [
+                        "top",
+                        "left",
+                        "width",
+                        "height"
+                      ],
+                      "properties": {
+                        "top": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "left": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "width": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "height": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      }
+                    }
+                  }
+                },
+                "squareCustomImage": {
+                  "type": "object",
+                  "required": [
+                    "assetId",
+                    "assetVersion"
+                  ],
+                  "properties": {
+                    "assetId": {
+                      "type": "string"
+                    },
+                    "assetVersion": {
+                      "type": "string"
+                    },
+                    "croppingCoordinates": {
+                      "type": "object",
+                      "required": [
+                        "top",
+                        "left",
+                        "width",
+                        "height"
+                      ],
+                      "properties": {
+                        "top": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "left": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "width": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "height": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      }
+                    }
+                  }
+                },
+                "squareImages": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "assetId",
+                      "assetVersion"
+                    ],
+                    "properties": {
+                      "assetId": {
+                        "type": "string"
+                      },
+                      "assetVersion": {
+                        "type": "string"
+                      },
+                      "croppingCoordinates": {
+                        "type": "object",
+                        "required": [
+                          "top",
+                          "left",
+                          "width",
+                          "height"
+                        ],
+                        "properties": {
+                          "top": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "left": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "width": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "height": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "horizontalImages": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "assetId",
+                      "assetVersion"
+                    ],
+                    "properties": {
+                      "assetId": {
+                        "type": "string"
+                      },
+                      "assetVersion": {
+                        "type": "string"
+                      },
+                      "croppingCoordinates": {
+                        "type": "object",
+                        "required": [
+                          "top",
+                          "left",
+                          "width",
+                          "height"
+                        ],
+                        "properties": {
+                          "top": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "left": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "width": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "height": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "verticalImages": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "assetId",
+                      "assetVersion"
+                    ],
+                    "properties": {
+                      "assetId": {
+                        "type": "string"
+                      },
+                      "assetVersion": {
+                        "type": "string"
+                      },
+                      "croppingCoordinates": {
+                        "type": "object",
+                        "required": [
+                          "top",
+                          "left",
+                          "width",
+                          "height"
+                        ],
+                        "properties": {
+                          "top": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "left": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "width": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "height": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "video": {
+                  "type": "object",
+                  "required": [
+                    "assetId",
+                    "assetVersion"
+                  ],
+                  "properties": {
+                    "assetId": {
+                      "type": "string"
+                    },
+                    "assetVersion": {
+                      "type": "string"
+                    },
+                    "originalAssetId": {
+                      "type": "string"
+                    },
+                    "originalAssetVersion": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "squareVideos": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "assetId",
+                      "assetVersion"
+                    ],
+                    "properties": {
+                      "assetId": {
+                        "type": "string"
+                      },
+                      "assetVersion": {
+                        "type": "string"
+                      },
+                      "originalAssetId": {
+                        "type": "string"
+                      },
+                      "originalAssetVersion": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "horizontalVideos": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "assetId",
+                      "assetVersion"
+                    ],
+                    "properties": {
+                      "assetId": {
+                        "type": "string"
+                      },
+                      "assetVersion": {
+                        "type": "string"
+                      },
+                      "originalAssetId": {
+                        "type": "string"
+                      },
+                      "originalAssetVersion": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "verticalVideos": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "assetId",
+                      "assetVersion"
+                    ],
+                    "properties": {
+                      "assetId": {
+                        "type": "string"
+                      },
+                      "assetVersion": {
+                        "type": "string"
+                      },
+                      "originalAssetId": {
+                        "type": "string"
+                      },
+                      "originalAssetVersion": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "backgrounds": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "color": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        "consentToTranslate": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  {
+    "family": "sd",
+    "path": "/sd/creatives",
+    "entity": "creatives",
+    "id": "creativeId",
+    "method": "PUT",
+    "action": "update",
+    "media": "application/json",
+    "accept": "application/json",
+    "wrap": "array",
+    "key": "creatives",
+    "schema": {
+      "type": "object",
+      "required": [
+        "creativeId",
+        "properties"
+      ],
+      "properties": {
+        "creativeId": {
+          "type": "number"
+        },
+        "creativeType": {
+          "type": "string",
+          "nullable": true,
+          "enum": [
+            "IMAGE",
+            "VIDEO"
+          ]
+        },
+        "properties": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "headline": {
+                  "type": "string",
+                  "maxLength": 50
+                },
+                "hasTermsAndConditions": {
+                  "type": "boolean"
+                },
+                "originalHeadline": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "brandLogo": {
+                  "type": "object",
+                  "required": [
+                    "assetId",
+                    "assetVersion"
+                  ],
+                  "properties": {
+                    "assetId": {
+                      "type": "string"
+                    },
+                    "assetVersion": {
+                      "type": "string"
+                    },
+                    "croppingCoordinates": {
+                      "type": "object",
+                      "required": [
+                        "top",
+                        "left",
+                        "width",
+                        "height"
+                      ],
+                      "properties": {
+                        "top": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "left": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "width": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "height": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "rectCustomImage": {
+                  "type": "object",
+                  "required": [
+                    "assetId",
+                    "assetVersion"
+                  ],
+                  "properties": {
+                    "assetId": {
+                      "type": "string"
+                    },
+                    "assetVersion": {
+                      "type": "string"
+                    },
+                    "croppingCoordinates": {
+                      "type": "object",
+                      "required": [
+                        "top",
+                        "left",
+                        "width",
+                        "height"
+                      ],
+                      "properties": {
+                        "top": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "left": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "width": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "height": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      }
+                    }
+                  }
+                },
+                "squareCustomImage": {
+                  "type": "object",
+                  "required": [
+                    "assetId",
+                    "assetVersion"
+                  ],
+                  "properties": {
+                    "assetId": {
+                      "type": "string"
+                    },
+                    "assetVersion": {
+                      "type": "string"
+                    },
+                    "croppingCoordinates": {
+                      "type": "object",
+                      "required": [
+                        "top",
+                        "left",
+                        "width",
+                        "height"
+                      ],
+                      "properties": {
+                        "top": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "left": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "width": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "height": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      }
+                    }
+                  }
+                },
+                "squareImages": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "assetId",
+                      "assetVersion"
+                    ],
+                    "properties": {
+                      "assetId": {
+                        "type": "string"
+                      },
+                      "assetVersion": {
+                        "type": "string"
+                      },
+                      "croppingCoordinates": {
+                        "type": "object",
+                        "required": [
+                          "top",
+                          "left",
+                          "width",
+                          "height"
+                        ],
+                        "properties": {
+                          "top": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "left": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "width": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "height": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "horizontalImages": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "assetId",
+                      "assetVersion"
+                    ],
+                    "properties": {
+                      "assetId": {
+                        "type": "string"
+                      },
+                      "assetVersion": {
+                        "type": "string"
+                      },
+                      "croppingCoordinates": {
+                        "type": "object",
+                        "required": [
+                          "top",
+                          "left",
+                          "width",
+                          "height"
+                        ],
+                        "properties": {
+                          "top": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "left": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "width": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "height": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "verticalImages": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "assetId",
+                      "assetVersion"
+                    ],
+                    "properties": {
+                      "assetId": {
+                        "type": "string"
+                      },
+                      "assetVersion": {
+                        "type": "string"
+                      },
+                      "croppingCoordinates": {
+                        "type": "object",
+                        "required": [
+                          "top",
+                          "left",
+                          "width",
+                          "height"
+                        ],
+                        "properties": {
+                          "top": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "left": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "width": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "height": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "video": {
+                  "type": "object",
+                  "required": [
+                    "assetId",
+                    "assetVersion"
+                  ],
+                  "properties": {
+                    "assetId": {
+                      "type": "string"
+                    },
+                    "assetVersion": {
+                      "type": "string"
+                    },
+                    "originalAssetId": {
+                      "type": "string"
+                    },
+                    "originalAssetVersion": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "squareVideos": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "assetId",
+                      "assetVersion"
+                    ],
+                    "properties": {
+                      "assetId": {
+                        "type": "string"
+                      },
+                      "assetVersion": {
+                        "type": "string"
+                      },
+                      "originalAssetId": {
+                        "type": "string"
+                      },
+                      "originalAssetVersion": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "horizontalVideos": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "assetId",
+                      "assetVersion"
+                    ],
+                    "properties": {
+                      "assetId": {
+                        "type": "string"
+                      },
+                      "assetVersion": {
+                        "type": "string"
+                      },
+                      "originalAssetId": {
+                        "type": "string"
+                      },
+                      "originalAssetVersion": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "verticalVideos": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "assetId",
+                      "assetVersion"
+                    ],
+                    "properties": {
+                      "assetId": {
+                        "type": "string"
+                      },
+                      "assetVersion": {
+                        "type": "string"
+                      },
+                      "originalAssetId": {
+                        "type": "string"
+                      },
+                      "originalAssetVersion": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "object",
+              "properties": {
+                "backgrounds": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "color": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+]

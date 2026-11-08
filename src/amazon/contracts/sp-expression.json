@@ -1,0 +1,30 @@
+{
+  "properties": {
+    "type": {
+      "enum": [
+        "ASIN_AGE_RANGE_SAME_AS",
+        "ASIN_BRAND_SAME_AS",
+        "ASIN_CATEGORY_SAME_AS",
+        "ASIN_EXPANDED_FROM",
+        "ASIN_GENRE_SAME_AS",
+        "ASIN_IS_PRIME_SHIPPING_ELIGIBLE",
+        "ASIN_PRICE_BETWEEN",
+        "ASIN_PRICE_GREATER_THAN",
+        "ASIN_PRICE_LESS_THAN",
+        "ASIN_REVIEW_RATING_BETWEEN",
+        "ASIN_REVIEW_RATING_GREATER_THAN",
+        "ASIN_REVIEW_RATING_LESS_THAN",
+        "ASIN_SAME_AS",
+        "KEYWORD_GROUP_SAME_AS"
+      ],
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "type"
+  ],
+  "type": "object"
+}
